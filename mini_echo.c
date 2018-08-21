@@ -6,11 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 14:29:55 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/07/17 11:55:18 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/21 16:34:26 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <21sh.h>
 
 int		mini_echo(char *argv[])
 {

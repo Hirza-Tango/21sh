@@ -6,11 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 16:29:30 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/03 16:40:53 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/21 16:34:26 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <21sh.h>
 
 static void	set_env(char *env_string, char *pos, char ***env)
 {

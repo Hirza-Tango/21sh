@@ -6,11 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 16:47:58 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/02 17:45:28 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/21 16:39:45 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <21sh.h>
 
 static int	env_replace(const char *name, const char *value, char **env)
 {

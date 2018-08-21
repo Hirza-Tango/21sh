@@ -1,4 +1,4 @@
-NAME=minishell
+NAME=21sh
 DEPS=get_next_line/get_next_line.o libft/libft.a
 LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
@@ -11,7 +11,7 @@ endif
 CFILES=	ft_getenv.c		ft_setenv.c		ft_unsetenv.c	mini_cd.c		\
 		mini_echo.c		mini_env.c		mini_launch.c	mini_pwd.c		\
 		mini_setenv.c	mini_unsetenv.c	utils.c			main.c			\
-		signal.c
+		signal.c		parser.c		editor.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 

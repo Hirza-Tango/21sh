@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/03 14:21:00 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/21 16:34:26 by dslogrov         ###   ########.fr       */
+/*   Created: 2018/08/21 16:16:25 by dslogrov          #+#    #+#             */
+/*   Updated: 2018/08/21 16:36:43 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <21sh.h>
 
-void	signal_handle(int sig)
+char	*editor(void)
 {
-	char	**env;
+	char		*input;
 
-	env = NULL;
-	(void)env;
-	if (sig == SIGINT)
+	if (get_next_line(0, &input) <= 0)
 	{
-		ft_putchar('\n');
-		prompt(g_env);
+		ft_putendl("exit");
+		exit(1);
 	}
-}
-
-void	ignore_child_signal(int sig)
-{
-	if (sig == SIGINT)
-		ft_putchar('\n');
+	return (input);
 }

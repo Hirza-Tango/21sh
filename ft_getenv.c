@@ -6,11 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 10:44:10 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/02 17:33:09 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/21 16:34:26 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <21sh.h>
 
 const char	*ft_getenv(const char *name, char **env)
 {
