@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:16:43 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/21 16:38:41 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/28 11:24:07 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ int			main(int argc, char *argv[], char *envv[])
 {
 	char		*input;
 	int			status;
+	t_d_list	*history;
 
 	(void)(argv && argc);
 	g_env = init_env(envv);
 	status = 0;
+	history = NULL;
 	signal(SIGINT, signal_handle);
 	while (1)
 	{
 		prompt(g_env);
-		input = editor();
+		input = editor(&history);
 		parser(input, &status);
 		free(input);
 	}

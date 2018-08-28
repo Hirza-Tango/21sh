@@ -48,7 +48,7 @@ void		prompt(char **env);
 void		signal_handle(int sig);
 void		ignore_child_signal(int sig);
 
-char		*editor(void);
+char		*editor(t_d_list **history);
 int			parser(const char *input, int *status);
 
 #endif
