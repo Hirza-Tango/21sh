@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   21sh.h                                        :+:      :+:    :+:   */
+/*   twentyonesh.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:04:50 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/21 16:27:21 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/29 15:17:12 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef TWENTYONESH_H
+# define TWENTYONESH_H
 
 # include <libft.h>
-# include <get_next_line.h>
+# include <ft_readline.h>
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,7 +24,10 @@
 # include <sys/wait.h>
 # include <signal.h>
 
-# define SHELL_NAME "minishell"
+
+
+# define SHELL_NAME "21sh"
+
 char	**g_env;
 
 # define CD_ERR SHELL_NAME ": cd"
@@ -48,7 +51,7 @@ void		prompt(char **env);
 void		signal_handle(int sig);
 void		ignore_child_signal(int sig);
 
-char		*editor(t_d_list **history);
+void		editor(t_d_list **history, char **input);
 int			parser(const char *input, int *status);
 
 #endif

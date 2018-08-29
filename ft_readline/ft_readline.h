@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor.c                                           :+:      :+:    :+:   */
+/*   ft_readline.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/21 16:16:25 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/28 13:29:17 by dslogrov         ###   ########.fr       */
+/*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
+/*   Updated: 2018/08/29 16:07:28 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <21sh.h>
+#ifndef FT_READLINE_H
+# define FT_READLINE_H
 
+# include <libft.h>
 
-char	*editor(t_d_list **history)
+# include <termios.h>
+# include <termcap.h>
+
+enum		e_keys
 {
-	char		*input;
-	t_d_list	*dup;
+	KEY_LEFT,
+	KEY_RIGHT,
+	KEY_UP,
+	KEY_DOWN,
+	KEY_CUT,
+	KEY_COPY,
+	KEY_PASTE,
+	KEY_CTRL_LEFT,
+	KEY_CTRL_RIGHT,
+	KEY_CTRL_UP,
+	KEY_CTRL_DOWN,
+	KEY_BACKSPACE,
+	KEY_DELETE,
+	KEY_ENTER,
+	KEY_COUNT
+};
 
-	input = NULL;
-	ft_dlstadd(history, ft_dlstnew(&input, sizeof(char **)));
-	if (get_next_line(0, &input) <= 0)
-	{
-		ft_putendl("exit");
-		exit(1);
-	}
-	return (input);
-}
+char	*ft_readline(const char *prompt);
+
+#endif
