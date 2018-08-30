@@ -6,31 +6,36 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/29 16:34:18 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/30 13:13:08 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_readline.h>
 
-static char	**init_keys(void)
+int		ft_putint(int c)
 {
-	char **tab;
+	write(1, c, sizeof(c));
+}
 
-	tab = malloc(KEY_COUNT * sizeof(char *));
-	tab[KEY_LEFT] = tgetstr("kl", NULL);
-	tab[KEY_RIGHT] = tgetstr("kr", NULL);
-	tab[KEY_UP] = tgetstr("ku", NULL);
-	tab[KEY_DOWN] = tgetstr("kd", NULL);
-	tab[KEY_CUT] = ft_strdup("");//TODO: CTRL bindings
-	tab[KEY_COPY] = tgetstr("", NULL);
-	tab[KEY_PASTE] = tgetstr("", NULL);
-	tab[KEY_CTRL_LEFT] = tgetstr("", NULL);
-	tab[KEY_CTRL_RIGHT] = tgetstr("", NULL);
-	tab[KEY_CTRL_UP] = tgetstr("", NULL);
-	tab[KEY_CTRL_DOWN] = tgetstr("", NULL);
-	tab[KEY_BACKSPACE] = tgetstr("kb", NULL);
-	tab[KEY_DELETE] = tgetstr("kD", NULL);
-	tab[KEY_ENTER] = ft_strdup("\n");
+static long	*init_keys(void)
+{
+	long	*tab;
+
+	tab = ft_memalloc(KEY_COUNT * sizeof(long));
+	tgetstr("kl", &tab[KEY_LEFT]);
+	tgetstr("kr", &tab[KEY_RIGHT]);
+	tgetstr("ku", &tab[KEY_UP]);
+	tgetstr("kd", &tab[KEY_DOWN]);
+	tab[KEY_CUT] = L'x' & 0x0200;
+	tab[KEY_COPY] = L'c' & 0x0200;
+	tab[KEY_PASTE] = L'v' & 0x0200;
+	tab[KEY_CTRL_LEFT] = tab[KEY_LEFT] & 0x0200;
+	tab[KEY_CTRL_RIGHT] = tab[KEY_RIGHT] & 0x0200;
+	tab[KEY_CTRL_UP] = tab[KEY_UP] & 0x0200;
+	tab[KEY_CTRL_DOWN] = tab[KEY_DOWN] & 0x0200;
+	tgetstr("kb", &tab[KEY_BACKSPACE]);
+	tgetstr("kD", &tab[KEY_DELETE]);
+	tab[KEY_ENTER] = '\n';
 	return (tab);
 }
 
@@ -48,7 +53,7 @@ static void	raw_key_handler(char *key, char *buffer)
 	else if (key == KEY_DELETE)
 		buffer[ft_strlen(buffer - 1)] = 0;
 	else if (key == KEY_LEFT)
-		tputs("le", 1, putchar);
+		tputs("le", 1, ft_putint);
 }
 
 char	*ft_readline(const char *prompt)
@@ -56,7 +61,7 @@ char	*ft_readline(const char *prompt)
 	t_d_list		*dup;
 	struct termios	term;
 	static char		**keys = NULL;
-	char			*key;
+	long			key;
 	
 	if (!keys)
 		keys = init_keys();
@@ -64,12 +69,12 @@ char	*ft_readline(const char *prompt)
 	term.c_lflag &= ~(ECHO | ICANON);
 	term.c_oflag &= ~OPOST;
 	tcsetattr(2, TCSAFLUSH, &term);
-	ft_bzero(key, 4);
+	key = 0;
 	while (1)
 	{
 		read(0, key, sizeof(long));
 		raw_key_handler(key, NULL);
-		ft_bzero(key, 4);
+		key = 0;
 	}
 	return ;
 }
