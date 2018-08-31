@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/29 16:07:28 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/08/31 13:56:32 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ enum		e_keys
 	KEY_COUNT
 };
 
-char	*ft_readline(const char *prompt);
+const char	*ft_readline(const char *prompt);
 
 #endif
