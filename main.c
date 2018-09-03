@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:16:43 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/29 14:39:11 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/03 14:40:34 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,15 @@ int			main(int argc, char *argv[], char *envv[])
 {
 	char		*input;
 	int			status;
-	t_d_list	*history;
 
 	(void)(argv && argc);
 	g_env = init_env(envv);
 	status = 0;
-	history = NULL;
-	signal(SIGINT, signal_handle);
+	//signal(SIGINT, signal_handle);
+	tgetent(NULL, ft_getenv("TERM", g_env));
 	while (1)
 	{
-		prompt(g_env);
-		editor(&history, &input);
+		input = (char *)ft_readline(prompt(g_env));
 		parser(input, &status);
 		free(input);
 	}

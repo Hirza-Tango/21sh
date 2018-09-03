@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:04:50 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/29 15:17:12 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/03 12:16:10 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TWENTYONESH_H
 
 # include <libft.h>
-# include <ft_readline.h>
+# include "ft_readline/ft_readline.h"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <get_next_line.h>
 
 
 
@@ -47,7 +48,7 @@ int			ft_unsetenv(const char *name, char ***env);
 char		*abs_to_rel(char *old, char **env, int reverse);
 void		substitutions(char **tab, char **env);
 int			default_path(char ***env);
-void		prompt(char **env);
+char		*prompt(char **env);
 void		signal_handle(int sig);
 void		ignore_child_signal(int sig);
 

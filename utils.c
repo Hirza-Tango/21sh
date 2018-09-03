@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 15:51:34 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/29 14:39:11 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/03 15:45:22 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,17 @@ int		ft_puterr(const char *command, const char *target,
 	return (code);
 }
 
-void	prompt(char **env)
+char	*prompt(char **env)
 {
 	char	*wd;
+	char	*ret;
 
 	if (!env)
-	{
-		ft_putstr("\e[31m$>\e[0m");
-		return ;
-	}
+		return ("\e[31m$>\e[0m");
 	wd = getcwd(NULL, 0);
 	ft_swapnfree(&wd, abs_to_rel(wd, env, 0));
-	ft_putstr("\e[32m");
-	ft_putstr(ft_getenv("USER", env));
-	ft_putstr("\e[31m");
-	ft_putstr("@");
-	ft_putstr("\e[33m");
-	ft_putstr(wd);
+	ret = ft_strmjoin(5, "\e[32m", ft_getenv("USER", env), "\e[31m@\e[36m", wd,
+		"\e[31m#\e[0m ");
 	free((char *)wd);
-	ft_putstr("\e[31m");
-	ft_putstr("#");
-	ft_putstr("\e[0m");
-	ft_putstr(" ");
+	return (ret);
 }

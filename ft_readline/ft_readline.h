@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/08/31 13:56:32 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:00:23 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # include <termios.h>
 # include <termcap.h>
+
+long		*g_keys;
 
 enum		e_keys
 {
@@ -34,9 +36,19 @@ enum		e_keys
 	KEY_BACKSPACE,
 	KEY_DELETE,
 	KEY_ENTER,
+	KEY_HOME,
+	KEY_END,
 	KEY_COUNT
 };
 
 const char	*ft_readline(const char *prompt);
+int			insert_char(t_d_list *entry, int c, size_t prompt_length, size_t *pos);
+int			ft_putint(int c);
+
+int			arrow_up(t_d_list **history, const char *prompt, size_t *pos);
+int			arrow_down(t_d_list **history, const char *prompt, size_t *pos);
+
+int			arrow_left(size_t prompt_len, size_t *pos);
+int			arrow_right(size_t prompt_len, size_t *pos, char *content);
 
 #endif

@@ -11,19 +11,20 @@ endif
 CFILES=	ft_getenv.c		ft_setenv.c		ft_unsetenv.c	mini_cd.c		\
 		mini_echo.c		mini_env.c		mini_launch.c	mini_pwd.c		\
 		mini_setenv.c	mini_unsetenv.c	utils.c			main.c			\
-		signal.c		parser.c		editor.c
+		signal.c		parser.c		ft_readline/ft_readline.c		\
+		ft_readline/insert.c			ft_readline/arrows.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 
 $(NAME): $(OBJ) $(REL_DEPS)
-	@gcc $(CFLAGS) -o $(NAME) $^
+	@gcc $(CFLAGS) -o $(NAME) $^ -ltermcap
 
 $(REL_DEPS):
 	@make -C $(dir $@)
 
 build/%.o: %.c
-	@mkdir -p build
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p build/ft_readline
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME);
 
