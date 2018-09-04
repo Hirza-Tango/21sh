@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/03 17:57:43 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 14:08:59 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static long	*init_keys(void)
 	return (tab);
 }
 
-int			meta_key_handler(long key, t_d_list *history)
+int			meta_key_handler(long key, t_d_list **history, const char *prompt,
+	size_t *pos)
 {
 	(void)history;
 	if (key == g_keys[KEY_COPY])
@@ -74,9 +75,9 @@ int			meta_key_handler(long key, t_d_list *history)
 	else if (key == g_keys[KEY_CTRL_RIGHT])
 		PASS;
 	else if (key == g_keys[KEY_HOME])
-		PASS;
+		nav_home(ft_strlen(prompt), pos);
 	else if (key == g_keys[KEY_END])
-		PASS;
+		nav_end(ft_strlen(prompt), pos, ((*history)->content));
 	else if (!key)
 		return (0);
 	return (1);
@@ -96,16 +97,16 @@ static int	raw_key_handler(long key, t_d_list **history, const char *prompt,
 	else if (key == g_keys[KEY_RIGHT])
 		arrow_right(ft_strlen(prompt), pos, (*history)->content);
 	else if (key == g_keys[KEY_BACKSPACE])
-		PASS;
+		nav_backspace(pos, (*history)->content);
 	else if (key == g_keys[KEY_DELETE])
-		PASS;
+		nav_delete(pos, (*history)->content);
 	else if (key == g_keys[KEY_ENTER])
 	{
 		ft_putstr("\n\r");
 		return (0);
 	}
 	else
-		return (meta_key_handler(key, *history));
+		return (meta_key_handler(key, history, prompt, pos));
 	return (1);
 }
 
@@ -151,8 +152,12 @@ const char	*ft_readline(const char *prompt)
 			break ;
 	}
 	unset_term_raw();
-	if (dup->content_size > 1)
-		ft_dlstadd(&list, elem_cpy(dup));
+	if (!ft_strlen(dup->content))
+	{
+		ft_dlstdel(&dup, elem_del);
+		return (NULL);
+	}
+	ft_dlstadd(&list, elem_cpy(dup));
 	ft_dlstdel(&dup, elem_del);
 	return (ft_strdup(list->content));
 }

@@ -2,7 +2,7 @@ NAME=21sh
 DEPS=get_next_line/get_next_line.o libft/libft.a
 LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
-REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%)
+REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%) ft_readline/ft_readline.a
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror -I . -I $(INCLUDES) -Ofast
 ifdef COMPILER_ARGS
@@ -11,8 +11,7 @@ endif
 CFILES=	ft_getenv.c		ft_setenv.c		ft_unsetenv.c	mini_cd.c		\
 		mini_echo.c		mini_env.c		mini_launch.c	mini_pwd.c		\
 		mini_setenv.c	mini_unsetenv.c	utils.c			main.c			\
-		signal.c		parser.c		ft_readline/ft_readline.c		\
-		ft_readline/insert.c			ft_readline/arrows.c
+		signal.c		parser.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 
@@ -24,7 +23,7 @@ $(REL_DEPS):
 
 build/%.o: %.c
 	@mkdir -p build/ft_readline
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME);
 
