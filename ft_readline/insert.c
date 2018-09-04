@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 10:55:51 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/03 17:02:59 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 16:04:05 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		insert_char(t_d_list *entry, int c, size_t prompt_length, size_t *pos)
 
 	if (!*(char *)entry->content)
 	{
-		entry->content = ft_memalloc(tgetnum("co") - prompt_length + 1);
+		ft_swapnfree(&(entry->content),ft_memalloc(tgetnum("co") - prompt_length + 1));
 		entry->content_size = tgetnum("co") - prompt_length + 1;
 	}
 	else if (entry->content_size == ft_strlen(entry->content) - 1)

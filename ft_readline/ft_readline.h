@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 15:19:48 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 15:23:38 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ struct termios	g_term;
 
 enum		e_keys
 {
-	KEY_LEFT,
-	KEY_RIGHT,
-	KEY_UP,
-	KEY_DOWN,
-	KEY_CUT,
-	KEY_COPY,
-	KEY_PASTE,
-	KEY_CTRL_LEFT,
-	KEY_CTRL_RIGHT,
-	KEY_CTRL_UP,
-	KEY_CTRL_DOWN,
-	KEY_BACKSPACE,
-	KEY_DELETE,
-	KEY_ENTER,
-	KEY_HOME,
-	KEY_END,
+	KEY_LEFT = 4479771,
+	KEY_RIGHT = 4414235,
+	KEY_UP = 4283163,
+	KEY_DOWN = 4348699,
+	KEY_CUT = 'x' | 0x0200,
+	KEY_COPY = 'c' | 0x0200,
+	KEY_PASTE = 'v' | 0x0200,
+	KEY_CTRL_LEFT = 74995417045787,
+	KEY_CTRL_RIGHT = 73895905418011,
+	KEY_CTRL_UP = 71696882162459,
+	KEY_CTRL_DOWN = 72796393790235,
+	KEY_BACKSPACE = 127,
+	KEY_DELETE = 2117294875,
+	KEY_ENTER = '\n',
+	KEY_HOME = 4741915,
+	KEY_END = 4610843,
 	KEY_COUNT
 };
 

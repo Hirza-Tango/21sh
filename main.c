@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:16:43 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/03 14:40:34 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 16:01:32 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static char	**init_env(char **env)
 int			main(int argc, char *argv[], char *envv[])
 {
 	char		*input;
+	char		*p;
 	int			status;
 
 	(void)(argv && argc);
@@ -39,8 +40,10 @@ int			main(int argc, char *argv[], char *envv[])
 	tgetent(NULL, ft_getenv("TERM", g_env));
 	while (1)
 	{
-		input = (char *)ft_readline(prompt(g_env));
+		p = prompt(g_env);
+		input = (char *)ft_readline(p);
 		parser(input, &status);
 		free(input);
+		free(p);
 	}
 }
