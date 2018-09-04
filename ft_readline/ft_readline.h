@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 12:36:55 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 15:19:48 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <termios.h>
 # include <termcap.h>
 
-long		*g_keys;
+long			*g_keys;
+struct termios	g_term;
 
 enum		e_keys
 {

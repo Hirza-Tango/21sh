@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 14:08:59 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 15:18:37 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ int			meta_key_handler(long key, t_d_list **history, const char *prompt,
 static int	raw_key_handler(long key, t_d_list **history, const char *prompt,
 	size_t *pos)
 {
+	if (key == 4 && !*((char *)(*history)->content))
+	{
+		ft_putstr("exit\n\r");
+		return (-1);
+	}
 	if (ft_isprint(key))
 		insert_char(*history, key, ft_strlen(prompt), pos);
 	else if (key == g_keys[KEY_UP])
@@ -114,20 +119,16 @@ void		set_term_raw(void)
 {
 	struct termios	term;
 
-	tcgetattr(2, &term);
+	tcgetattr(0, &term);
+	g_term = term;
 	term.c_lflag &= ~(ECHO | ICANON);
 	term.c_oflag &= ~OPOST;
-	tcsetattr(2, TCSAFLUSH, &term);
+	tcsetattr(0, TCSAFLUSH, &term);
 }
 
 void		unset_term_raw(void)
 {
-	struct termios	term;
-
-	tcgetattr(2, &term);
-	term.c_lflag |= ECHO & ICANON;
-	term.c_oflag |= OPOST;
-	tcsetattr(2, TCSAFLUSH, &term);
+	tcsetattr(0, TCSAFLUSH, &g_term);
 }
 
 const char	*ft_readline(const char *prompt)
@@ -148,14 +149,21 @@ const char	*ft_readline(const char *prompt)
 	{
 		key = 0;
 		read(0, &key, sizeof(long));
-		if (!raw_key_handler(key, &dup, prompt, &pos))
+		key = raw_key_handler(key, &dup, prompt, &pos);
+		if (!key)
 			break ;
+		if (key < 0)
+		{
+			unset_term_raw();
+			ft_dlstdel(&dup, elem_del);
+			return (ft_strdup("exit"));
+		}
 	}
 	unset_term_raw();
 	if (!ft_strlen(dup->content))
 	{
 		ft_dlstdel(&dup, elem_del);
-		return (NULL);
+		return (ft_strdup(""));
 	}
 	ft_dlstadd(&list, elem_cpy(dup));
 	ft_dlstdel(&dup, elem_del);
