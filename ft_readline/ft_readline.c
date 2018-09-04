@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 15:40:30 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 16:49:17 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int			meta_key_handler(long key, t_d_list **history, const char *prompt,
 	else if (key == KEY_CTRL_DOWN)
 		PASS;
 	else if (key == KEY_CTRL_LEFT)
-		PASS;
+		ctrl_arrow_left(ft_strlen(prompt), pos, (*history)->content);
 	else if (key == KEY_CTRL_RIGHT)
-		PASS;
+		ctrl_arrow_right(ft_strlen(prompt), pos, (*history)->content);
 	else if (key == KEY_HOME)
 		nav_home(ft_strlen(prompt), pos);
 	else if (key == KEY_END)

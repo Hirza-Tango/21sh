@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 15:23:38 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/04 16:48:06 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int			arrow_up(t_d_list **history, const char *prompt, size_t *pos);
 int			arrow_down(t_d_list **history, const char *prompt, size_t *pos);
 int			arrow_left(size_t prompt_len, size_t *pos);
 int			arrow_right(size_t prompt_len, size_t *pos, char *content);
+
+int			ctrl_arrow_left(size_t prompt_len, size_t *pos, char *content);
+int			ctrl_arrow_right(size_t prompt_len, size_t *pos, char *content);
 
 int			nav_end(size_t prompt_len, size_t *pos, char *content);
 int			nav_home(size_t prompt_len, size_t *pos);
