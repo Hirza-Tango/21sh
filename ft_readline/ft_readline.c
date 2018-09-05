@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 16:49:17 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 16:32:58 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 t_d_list	*elem_cpy(t_d_list *elem)
 {
 	return (ft_dlstnew(elem->content, elem->content_size));
+}
+
+size_t		prompt_len(const char *prompt)
+{
+	char	*temp;
+	size_t	ret;
+
+	temp = (char *)prompt;
+	ret = 0;
+	while (*prompt)
+	{
+		if (*prompt == '\e')
+			while (*prompt != 'm')
+				prompt++;
+		else
+			ret++;
+		prompt++;
+	}
+	return(ret);
 }
 
 void		elem_del(void *content, size_t content_size)
@@ -47,13 +66,13 @@ int			meta_key_handler(long key, t_d_list **history, const char *prompt,
 	else if (key == KEY_CTRL_DOWN)
 		PASS;
 	else if (key == KEY_CTRL_LEFT)
-		ctrl_arrow_left(ft_strlen(prompt), pos, (*history)->content);
+		ctrl_arrow_left(prompt_len(prompt), pos, (*history)->content);
 	else if (key == KEY_CTRL_RIGHT)
-		ctrl_arrow_right(ft_strlen(prompt), pos, (*history)->content);
+		ctrl_arrow_right(prompt_len(prompt), pos, (*history)->content);
 	else if (key == KEY_HOME)
-		nav_home(ft_strlen(prompt), pos);
+		nav_home(prompt_len(prompt), pos);
 	else if (key == KEY_END)
-		nav_end(ft_strlen(prompt), pos, ((*history)->content));
+		nav_end(prompt_len(prompt), pos, ((*history)->content));
 	else if (!key)
 		return (0);
 	return (1);
@@ -68,21 +87,22 @@ static int	raw_key_handler(long key, t_d_list **history, const char *prompt,
 		return (-1);
 	}
 	if (ft_isprint(key))
-		insert_char(*history, key, ft_strlen(prompt), pos);
+		insert_char(*history, key, prompt, pos);
 	else if (key == KEY_UP)
 		arrow_up(history, prompt, pos);
 	else if (key == KEY_DOWN)
 		arrow_down(history, prompt, pos);
 	else if (key == KEY_LEFT)
-		arrow_left(ft_strlen(prompt), pos);
+		arrow_left(prompt_len(prompt), pos);
 	else if (key == KEY_RIGHT)
-		arrow_right(ft_strlen(prompt), pos, (*history)->content);
+		arrow_right(prompt_len(prompt), pos, (*history)->content);
 	else if (key == KEY_BACKSPACE)
 		nav_backspace(pos, (*history)->content);
 	else if (key == KEY_DELETE)
 		nav_delete(pos, (*history)->content);
 	else if (key == KEY_ENTER)
 	{
+		nav_end(prompt_len(prompt), pos, (*history)->content);
 		ft_putstr("\n\r");
 		return (0);
 	}

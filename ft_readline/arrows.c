@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 16:25:17 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/03 17:00:16 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 13:15:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,19 @@ int	arrow_down(t_d_list **history, const char *prompt, size_t *pos)
 
 int	arrow_left(size_t prompt_len, size_t *pos)
 {
-	(void)prompt_len;
+	int	i;
+
 	if (*pos)
 	{
-		tputs(tgetstr("le", NULL), 1, ft_putint);
+		if ((prompt_len + *pos) % tgetnum("co") == 0)
+		{
+			tputs(tgetstr("up", NULL), 1, ft_putint);
+			i = 0;
+			while (i++ < tgetnum("co") - 1)
+				tputs(tgetstr("nd", NULL), 1, ft_putint);
+		}
+		else
+			tputs(tgetstr("le", NULL), 1, ft_putint);
 		(*pos)--;
 		return (1);
 	}
@@ -63,7 +72,13 @@ int	arrow_right(size_t prompt_len, size_t *pos, char *content)
 	(void)prompt_len;
 	if (content && *pos < ft_strlen(content))
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_putint);
+		if ((prompt_len + *pos + 1) % tgetnum("co") == 0)
+		{
+			tputs(tgetstr("do", NULL), 1, ft_putint);
+			tputs("\r", 1, ft_putint);
+		}
+		else
+			tputs(tgetstr("nd", NULL), 1, ft_putint);
 		(*pos)++;
 		return (1);
 	}
