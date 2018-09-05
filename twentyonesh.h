@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:04:50 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/03 12:16:10 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:08:48 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <get_next_line.h>
-
-
 
 # define SHELL_NAME "21sh"
 

@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 16:24:05 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 13:29:58 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:08:38 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	call_handler(char *argv[], char ***env, int *status)
 	set_underscore(argv, env);
 }
 
-int	parser(const char *input, int *status)
+int			parser(const char *input, int *status)
 {
 	char		**bigargs;
 	char		**dup;

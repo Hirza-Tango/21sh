@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 16:25:17 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 13:15:20 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 17:24:57 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	arrow_up(t_d_list **history, const char *prompt, size_t *pos)
 	if ((*history)->next)
 	{
 		*history = (*history)->next;
+		nav_home(prompt_len(prompt), pos);
 		tputs(tgetstr("cr", NULL), 1, ft_putint);
-		tputs(tgetstr("ce", NULL), 1, ft_putint);
+		tputs(tgetstr("cd", NULL), 1, ft_putint);
 		ft_putstr(prompt);
 		ft_putstr((*history)->content);
 		*pos = ft_strlen((*history)->content);
@@ -32,8 +33,9 @@ int	arrow_down(t_d_list **history, const char *prompt, size_t *pos)
 	if ((*history)->prev)
 	{
 		*history = (*history)->prev;
+		nav_home(prompt_len(prompt), pos);
 		tputs(tgetstr("cr", NULL), 1, ft_putint);
-		tputs(tgetstr("ce", NULL), 1, ft_putint);
+		tputs(tgetstr("cd", NULL), 1, ft_putint);
 		ft_putstr(prompt);
 		ft_putstr((*history)->content);
 		*pos = ft_strlen((*history)->content);

@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:15:13 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 16:13:31 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:14:10 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,24 @@ enum		e_keys
 };
 
 const char	*ft_readline(const char *prompt);
-int			insert_char(t_d_list *entry, int c, const char *prompt, size_t *pos);
+int			insert_char(t_d_list *entry, int c, const char *prompt,
+	size_t *pos);
+
+t_d_list	*elem_cpy(t_d_list *elem);
+void		elem_del(void *content, size_t content_size);
 int			ft_putint(int c);
 size_t		prompt_len(const char *prompt);
+
+void		set_term_raw(void);
+void		unset_term_raw(void);
 
 int			arrow_up(t_d_list **history, const char *prompt, size_t *pos);
 int			arrow_down(t_d_list **history, const char *prompt, size_t *pos);
 int			arrow_left(size_t prompt_len, size_t *pos);
 int			arrow_right(size_t prompt_len, size_t *pos, char *content);
 
+int			ctrl_arrow_up(size_t prompt_len, size_t *pos);
+int			ctrl_arrow_down(size_t prompt_len, size_t *pos, char *content);
 int			ctrl_arrow_left(size_t prompt_len, size_t *pos, char *content);
 int			ctrl_arrow_right(size_t prompt_len, size_t *pos, char *content);
 

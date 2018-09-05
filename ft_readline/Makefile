@@ -8,7 +8,8 @@ CFLAGS=-Wall -Wextra -Werror -I. -I$(INCLUDES) -Ofast
 ifdef COMPILER_ARGS
 CFLAGS+= -D$(COMPILER_ARGS)
 endif
-CFILES=	arrows.c	ctrl_arrows.c	ft_readline.c	insert.c	navpad.c
+CFILES=	arrows.c	ctrl_arrows.c	ft_readline.c	insert.c	\
+		navpad.c	term.c			utils.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 

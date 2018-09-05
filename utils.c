@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 15:51:34 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/04 16:00:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/05 18:30:10 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	substitutions(char **tab, char **env)
 	while (*tab)
 	{
 		if (**tab == '~')
-			ft_swapnfree(tab, abs_to_rel(*tab, env, 1));
+			ft_swapnfree((void **)tab, abs_to_rel(*tab, env, 1));
 		if (**tab == '$' && (*tab)[1] != '?' && (*tab)[1] != '@')
-			ft_swapnfree(tab, ft_getenv(*tab + 1, env) ?
+			ft_swapnfree((void **)tab, ft_getenv(*tab + 1, env) ?
 				ft_strdup(ft_getenv(*tab + 1, env)) : ft_strdup(""));
 		tab++;
 	}
@@ -83,7 +83,7 @@ char	*prompt(char **env)
 	if (!env)
 		return ("\e[31m$>\e[0m");
 	wd = getcwd(NULL, 0);
-	ft_swapnfree(&wd, abs_to_rel(wd, env, 0));
+	ft_swapnfree((void **)&wd, abs_to_rel(wd, env, 0));
 	ret = ft_strmjoin(5, "\e[32m", ft_getenv("USER", env), "\e[31m@\e[36m", wd,
 		"\e[31m#\e[0m ");
 	free((char *)wd);
