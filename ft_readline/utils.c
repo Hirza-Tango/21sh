@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 18:12:52 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 18:14:42 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/09 21:45:58 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ size_t		prompt_len(const char *prompt)
 
 	temp = (char *)prompt;
 	ret = 0;
-	while (*prompt)
+	while (*temp)
 	{
-		if (*prompt == '\e')
-			while (*prompt != 'm')
-				prompt++;
+		if (*temp == '\e')
+			while (*temp != 'm' && temp[1])
+				temp++;
 		else
 			ret++;
-		prompt++;
+		temp++;
 	}
 	return (ret);
 }
