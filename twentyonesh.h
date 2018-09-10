@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:04:50 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 18:08:48 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/10 14:54:47 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <libft.h>
 # include "ft_readline/ft_readline.h"
+# include "token_parser/token_parser.h"
 
 # include <stdlib.h>
 # include <unistd.h>
