@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 10:55:51 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 18:21:45 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/10 13:52:02 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ static void	ft_resize(t_d_list *entry, int c, size_t prompt_len, size_t *pos)
 	}
 	entry->content_size += ft_strinsert(entry->content, c, (*pos)++);
 }
-
-/*
-**	TODO: inserting on an upper line needs to redraw
-*/
 
 int			insert_char(t_d_list *entry, int c, const char *prompt, size_t *pos)
 {
