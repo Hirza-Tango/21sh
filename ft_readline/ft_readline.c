@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 15:13:32 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/05 18:12:48 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/10 14:56:38 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	raw_key_handler(long key, t_d_list **history, const char *prompt,
 	return (1);
 }
 
-const char	*ft_readline(const char *prompt)
+char	*ft_readline(const char *prompt)
 {
 	static t_d_list	*list = NULL;
 	t_d_list		*dup;
