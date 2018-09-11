@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:56:04 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/11 12:56:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/11 18:44:18 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 enum	e_tokens
 {
 	TOK_END = 0,
+	TOK_DQUOTE,
+	TOK_SQUOTE,
 	TOK_TOKEN,
 	TOK_NEWLINE,
 	TOK_WORD,
