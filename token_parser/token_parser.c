@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:56:48 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/12 14:53:04 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/12 15:10:41 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	tok_dquote(char **s, t_list **list)
 	{
 		if (!(*s)[i])
 			ft_swapnfree((void **)s,
-				ft_strmjoin(3, *s, "\n", ft_readline("> ")));
+				ft_strmjoin(3, *s, "\n", ft_readline("DQUOTE: ")));
 		i++;
 	}
 	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, i + 1), T_DQUOTE));
@@ -148,7 +148,7 @@ void	tok_squote(char **s, t_list **list)
 	{
 		if (!(*s)[i])
 			ft_swapnfree((void **)s,
-				ft_strmjoin(3, *s, "\n", ft_readline("> ")));
+				ft_strmjoin(3, *s, "\n", ft_readline("SQUOTE: ")));
 		i++;
 	}
 	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, i + 1), T_SQUOTE));
