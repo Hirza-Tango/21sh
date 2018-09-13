@@ -8,7 +8,7 @@ CFLAGS=-Wall -Wextra -Werror -I. -I$(INCLUDES) -O0
 ifdef COMPILER_ARGS
 CFLAGS+= -D$(COMPILER_ARGS)
 endif
-CFILES=	token_parser.c
+CFILES=	token_parser.c	operators.c	utils.c	specials.c	words.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 

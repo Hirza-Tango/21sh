@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:56:04 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/12 14:14:23 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/13 16:11:09 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ enum	e_tokens
 	T_NEWLINE,
 	T_WORD,
 	T_NAME,
+	T_PARAM,
+	T_COMSUB,
 	T_ASSIGNMENT_WORD,
 	T_IO_NUMBER,
 	T_AND_IF,
@@ -59,5 +61,19 @@ enum	e_tokens
 };
 
 char	*token_list(const char *prompt);
+
+int		ft_is_redir_word(char *s);
+void	tok_operator(char *s, t_list **list, size_t *i);
+int		ft_is_op_char(char c);
+
+void	tok_dquote(char **s, t_list **list, size_t *i);
+void	tok_squote(char **s, t_list **list, size_t *i);
+void	tok_word(char *s, t_list **list, size_t *i);
+
+void	tok_newline(char *s, t_list **list, size_t *i);
+void	tok_space(char *s, t_list **list, size_t *i);
+void	tok_comment(char *s, t_list **list, size_t *i);
+
+t_list	*ft_lstfake(void *content, size_t content_size);
 
 #endif
