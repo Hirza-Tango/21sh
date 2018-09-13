@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:56:48 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/13 13:14:21 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:48:21 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ void	tok_word(char *s, t_list **list, size_t *i)
 		//TODO: line continuation on '//'
 		if (ft_is_op_char(s[j]) || ft_isspace(s[j]))
 			break ;
-		if (/*s[j] == '$' || s[j] == '`' || */s[j] == '#')
-			break ;
+		/*if *s[j] == '$' || s[j] == '`' || )
+			break ;*/
 		prev = s[j];
 		j++;
 	}
@@ -279,6 +279,7 @@ char	*token_list(const char *prompt)
 
 	result = ft_readline(prompt);
 	split = split_tokens(result);
+	ft_putendl(result);
 	ft_lstiter(split, list_print);
 	ft_putendl("LOG: Done parsing");
 	return (ft_strdup(""));

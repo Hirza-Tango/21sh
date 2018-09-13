@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 17:16:43 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/12 12:17:48 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/12 15:04:16 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int			main(int argc, char *argv[], char *envv[])
 	{
 		p = prompt(g_env);
 		input = token_list(p);
-		parser(input, &status);
-		free(input);
-		free(p);
+		//parser(input, &status);
+		//free(input);
+		//free(p);
 	}
 }
