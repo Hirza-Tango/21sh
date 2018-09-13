@@ -6,13 +6,13 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 13:56:48 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/12 15:10:41 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:14:21 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token_parser.h"
 
-t_list	*ft_lstfakenew(void *content, size_t content_size)
+t_list	*ft_lstfake(void *content, size_t content_size)
 {
 	t_list	*ret;
 
@@ -80,30 +80,30 @@ int		ft_is_redir_word(char *s)
 	return (0);
 }
 
-void	tok_operator(char **s, t_list **list)
+void	tok_operator(char *s, t_list **list, size_t *i)
 {
-	if (ft_is_redir_word(*s))
+	if (ft_is_redir_word(&s[*i]))
 	{
-		ft_lstappend(list, ft_lstfakenew(
-			ft_strndup(*s, ft_is_redir_word(*s)), redir_type(*s)));
-		*s += ft_is_redir_word(*s);
+		ft_lstappend(list, ft_lstfake(
+			ft_strndup(&s[*i], ft_is_redir_word(&s[*i])), redir_type(&s[*i])));
+		*i += ft_is_redir_word(&s[*i]);
 	}
-	else if ((**s == '|' || **s == '&' || **s == ';') && (*s)[0] == (*s)[1])
+	else if (s[*i] == s[*i + 1])
 	{
-		if (**s == '|')
-			ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 2), T_OR_IF));
-		else if (**s == '&')
-			ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 2), T_AND_IF));
-		else if (**s == ';')
-			ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 2), T_DSEMI));
-		(*s)++;
+		if (s[*i] == '|')
+			ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 2), T_OR_IF));
+		else if (s[*i] == '&')
+			ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 2), T_AND_IF));
+		else if (s[*i] == ';')
+			ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 2), T_DSEMI));
+		(*i)++;
 	}
-	else if (**s == '|')
-		ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 1), T_PIPE));
-	else if (**s == '&')
-		ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 1), T_AMP));
-	else if (**s == ';')
-		ft_lstappend(list, ft_lstfakenew(ft_strndup((*s)++, 1), T_SEMI));
+	else if (s[*i] == '|')
+		ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 1), T_PIPE));
+	else if (s[*i] == '&')
+		ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 1), T_AMP));
+	else if (s[*i] == ';')
+		ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 1), T_SEMI));
 }
 
 int		ft_is_op_char(char c)
@@ -113,116 +113,109 @@ int		ft_is_op_char(char c)
 	return (0);
 }
 
-void	tok_newline(char **s, t_list **list)
+void	tok_newline(char *s, t_list **list, size_t *i)
 {
-	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, 1), T_NEWLINE));
-	*s += 1;
+	ft_lstappend(list, ft_lstfake(ft_strsub(s, (*i)++, 1), T_NEWLINE));
 }
 
-void	tok_dquote(char **s, t_list **list)
+void	tok_dquote(char **s, t_list **list, size_t *i)
 {
-	size_t	i;
+	size_t	j;
 
-	if (**s != '\"')
-		return ;
-	i = 1;
-	while ((*s)[i] != '\"' && (*s)[i - 1] != '\\')
+	j = ++(*i);
+	while ((*s)[j] != '\"' && (*s)[j - 1] != '\\')
 	{
-		if (!(*s)[i])
+		if (!(*s)[j])
 			ft_swapnfree((void **)s,
 				ft_strmjoin(3, *s, "\n", ft_readline("DQUOTE: ")));
-		i++;
+		j++;
 	}
-	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, i + 1), T_DQUOTE));
-	*s += i + 1;
+	ft_lstappend(list, ft_lstfake(ft_strsub(*s, *i, j - *i), T_DQUOTE));
+	*i = j + 1;
 }
 
-void	tok_squote(char **s, t_list **list)
+void	tok_squote(char **s, t_list **list, size_t *i)
 {
-	size_t	i;
+	size_t	j;
 
-	if (**s != '\'')
-		return ;
-	i = 1;
-	while ((*s)[i] != '\'')
+	j = ++(*i);
+	while ((*s)[j] != '\'')
 	{
-		if (!(*s)[i])
+		if (!(*s)[j])
 			ft_swapnfree((void **)s,
 				ft_strmjoin(3, *s, "\n", ft_readline("SQUOTE: ")));
-		i++;
+		j++;
 	}
-	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, i + 1), T_SQUOTE));
-	*s += i + 1;
+	ft_lstappend(list, ft_lstfake(ft_strsub(*s, *i, j - *i), T_SQUOTE));
+	*i = j + 1;
 }
 
-void	tok_word(char **s, t_list **list)
+void	tok_word(char *s, t_list **list, size_t *i)
 {
-	char	*dup;
 	char	prev;
+	size_t	j;
 
-	dup = *s;
+	j = *i;
 	prev = 0;
-	while (*dup)
+	while (s[j])
 	{
-		if ((*dup == '\"' || *dup == '\'') && prev != '\\')
+		if ((s[j] == '\"' || s[j] == '\'') && prev != '\\')
 			break ;
-		if (ft_is_op_char(*dup) || ft_isspace(*dup))
+		//TODO: line continuation on '//'
+		if (ft_is_op_char(s[j]) || ft_isspace(s[j]))
 			break ;
-		if (*dup == '$' || *dup == '`' || *dup == '#')
+		if (/*s[j] == '$' || s[j] == '`' || */s[j] == '#')
 			break ;
-		prev = *dup;
-		dup++;
+		prev = s[j];
+		j++;
 	}
-	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, dup - *s), T_WORD));
-	(void)list;
-	*s = dup;
+	ft_lstappend(list, ft_lstfake(ft_strsub(s, *i, j - *i), T_WORD));
+	*i = j;
 }
 
-void	tok_space(char **s, t_list **list)
+void	tok_space(char *s, t_list **list, size_t *i)
 {
-	while (ft_isspace(**s) && **s != '\n')
-		(*s)++;
-	ft_lstappend(list, ft_lstfakenew(ft_strdup(" "), T_SPACE));
+	while (ft_isspace(s[*i]) && s[*i] != '\n')
+		(*i)++;
+	ft_lstappend(list, ft_lstfake(ft_strdup(" "), T_SPACE));
 }
 
-void	tok_comment(char **s, t_list **list)
+void	tok_comment(char *s, t_list **list, size_t *i)
 {
-	char *dup;
+	size_t	j;
 
-	if (**s != '#')
-		return ;
-	dup = *s + 1;
-	while (*dup != '\n' && *dup)
-		dup++;
-	ft_lstappend(list, ft_lstfakenew(ft_strndup(*s, dup - *s), T_COMMENT));
-	*s = dup;
+	j = *i;
+	while (s[j] != '\n' && s[j])
+		j++;
+	ft_lstappend(list, ft_lstfake(ft_strsub(s, *i, j - *i), T_COMMENT));
+	*i = j;
 }
 
 t_list	*split_tokens(char *result)
 {
 	t_list	*list;
-	char	*dup;
+	size_t	i;
 
 	list = NULL;
-	dup = result;
-	while (*dup)
+	i = 0;
+	while (result[i])
 	{
-		if (*dup == '\"')
-			tok_dquote(&dup, &list);
-		else if (*dup == '\'')
-			tok_squote(&dup, &list);
-		else if (ft_is_op_char(*dup) || ft_is_redir_word(dup))
-			tok_operator(&dup, &list);
-		else if (*dup == '\n')
-			tok_newline(&dup, &list);
-		else if (ft_isspace(*dup))
-			tok_space(&dup, &list);
-		//else if (*dup == '$' || *dup == '`')
-		//	tok_subst(&dup, &list);
-		else if (*dup == '#')
-			tok_comment(&dup, &list);
+		if (result[i] == '\"')
+			tok_dquote(&result, &list, &i);
+		else if (result[i] == '\'')
+			tok_squote(&result, &list, &i);
+		else if (ft_is_op_char(result[i]) || ft_is_redir_word(result + i))
+			tok_operator(result, &list, &i);
+		else if (result[i] == '\n')
+			tok_newline(result, &list, &i);
+		else if (ft_isspace(result[i]))
+			tok_space(result, &list, &i);
+		//else if (*result == '$' || *result == '`')
+		//	tok_subst(&result, &list);
+		else if (result[i] == '#')
+			tok_comment(result, &list, &i);
 		else
-			tok_word(&dup, &list);
+			tok_word(result, &list, &i);
 	}
 	return (list);
 }
@@ -269,7 +262,7 @@ void	list_print(t_list *elem)
 		case T_NEWLINE :
 			ft_putstr("NEWLINE"); break;
 		case T_SPACE :
-			/*ft_putstr("SPACE");*/ break;
+			break;
 		case T_COMMENT :
 			ft_putstr("COMMENT"); break;
 		default :
