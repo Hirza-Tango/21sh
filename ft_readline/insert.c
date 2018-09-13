@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 10:55:51 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/10 13:52:02 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:59:31 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_resize(t_d_list *entry, int c, size_t prompt_len, size_t *pos)
 	}
 	else if (entry->content_size == ft_strlen(entry->content) - 1)
 	{
-		new_buff = ft_memalloc(entry->content_size + tgetnum("co"));
+		new_buff = ft_memalloc(entry->content_size + tgetnum("co") + 1);
 		ft_strcpy(new_buff, entry->content);
 		free(entry->content);
 		entry->content = new_buff;
