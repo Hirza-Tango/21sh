@@ -2,7 +2,8 @@ NAME=21sh
 DEPS=get_next_line/get_next_line.o libft/libft.a
 LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
-REL_DEPS=ft_readline/ft_readline.a token_parser/token_parser.a $(DEPS:%=$(LIBFT_DIR)/%)
+REL_DEPS=ft_readline/ft_readline.a ft_shell_parser/ft_shell_parser.a \
+	$(DEPS:%=$(LIBFT_DIR)/%)
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror -I . -I $(INCLUDES) -Ofast
 ifdef COMPILER_ARGS

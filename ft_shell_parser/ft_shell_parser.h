@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_shell_parser.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 14:51:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/13 14:52:26 by dslogrov         ###   ########.fr       */
+/*   Created: 2018/09/25 15:45:55 by dslogrov          #+#    #+#             */
+/*   Updated: 2018/09/25 16:04:33 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token_parser.h"
+#ifndef FT_SHELL_PARSER_H
+# define FT_SHELL_PARSER_H
 
-t_list	*ft_lstfake(void *content, size_t content_size)
-{
-	t_list	*ret;
+# include <libft.h>
+# include "../ft_readline/ft_readline.h"
 
-	ret = malloc(sizeof(t_list));
-	if (!ret)
-		return (NULL);
-	ret->content = content;
-	ret->content_size = content_size;
-	ret->next = NULL;
-	return (ret);
-}
+char	*token_list(const char *prompt);
+
+#endif

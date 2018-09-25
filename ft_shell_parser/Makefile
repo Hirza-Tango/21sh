@@ -1,14 +1,14 @@
-NAME=token_parser.a
+NAME=ft_shell_parser.a
 DEPS=libft/libft.a
 LIBFT_DIR=../libft
 INCLUDES=$(LIBFT_DIR)/includes
 REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%)
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -I. -I$(INCLUDES) -O0
+CFLAGS=-Wall -Wextra -Werror -I. -I$(INCLUDES) -Ofast
 ifdef COMPILER_ARGS
 CFLAGS+= -D$(COMPILER_ARGS)
 endif
-CFILES=	token_parser.c	operators.c	utils.c	specials.c	words.c
+CFILES=	ft_shell_parser.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 
