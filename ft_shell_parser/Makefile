@@ -8,7 +8,7 @@ CFLAGS=-Wall -Wextra -Werror -I. -I$(INCLUDES) -Ofast
 ifdef COMPILER_ARGS
 CFLAGS+= -D$(COMPILER_ARGS)
 endif
-CFILES=	ft_shell_parser.c
+CFILES=	ft_shell_parser.c	continuation.c
 
 OBJ=$(CFILES:%.c=build/%.o)
 
