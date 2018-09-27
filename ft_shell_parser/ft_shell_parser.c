@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 15:48:05 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/27 15:57:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/27 16:39:59 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,8 @@ t_token	*tokenize(char *s, char **env)
 	{
 		if (type == T_OPERATOR && !op_tok(s, start, end))
 		{
-			end--;
-			add_token(&lst, delim(s, &start, end), op_tok(s, start, end));
-			end--;
+			type = op_tok(s, start, --end);
+			add_token(&lst, delim(s, &start, end--), type);
 			type = T_WORD;
 		}
 		else if (type == T_OPERATOR)
