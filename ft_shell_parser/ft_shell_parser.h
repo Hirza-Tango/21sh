@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 15:45:55 by dslogrov          #+#    #+#             */
-/*   Updated: 2018/09/26 16:33:40 by dslogrov         ###   ########.fr       */
+/*   Updated: 2018/09/27 15:54:46 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@
 # include <libft.h>
 # include "../ft_readline/ft_readline.h"
 
-enum	e_tokens
+enum			e_tokens
 {
 	T_WORD,
 	T_PIPE,
-	T_EOF,
 	T_OPERATOR,
+	T_SEMI,
+	T_LESS,
+	T_GREAT,
+	T_OR_IF,
+	T_AND_IF,
+	T_DLESS,
+	T_DGREAT,
+	T_LESSAND,
+	T_GREATAND,
+	T_LESSGREAT
 };
 
 typedef struct	s_token
@@ -31,10 +40,13 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-char	*token_list(const char *prompt);
-char	*ft_get_full_line(const char *prompt);
-char	*continue_dquote(char **s, size_t *pos);
-char	*continue_squote(char **s, size_t *pos);
-char	*continue_lit(char **s, size_t *pos);
+char			*token_list(const char *prompt, char **env);
+
+char			*continue_dquote(char **s, size_t *pos);
+char			*continue_squote(char **s, size_t *pos);
+char			*continue_lit(char **s, size_t *pos);
+char			*continue_substitution(char **s, size_t *pos, char **env);
+
+char			*ft_getenv(const char *name, char **env);
 
 #endif
